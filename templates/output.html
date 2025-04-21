@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vitamin Deficiency Result</title>
+    <style>
+        :root {
+      --bg-dark: #0f172a;
+      --text-light: #f8fafc;
+      --text-muted: #cbd5e1;
+      --amber: #8e90b2;
+      --red-gradient: linear-gradient(to bottom right, #2e3172, #16064a);
+      --purple-gradient: linear-gradient(to bottom right, #2e3172, #16064a);
+      --green-gradient: linear-gradient(to bottom right, #2e3172, #16064a);
+      --blue-gradient: linear-gradient(to bottom right, #2e3172, #16064a);
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      color: var(--amber);
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--amber);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .overview {
+      margin-bottom: 2rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: 0.5rem;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+      overflow: hidden;
+      max-height: 120px;
+    }
+
+    .card.expanded {
+      max-height: 1000px;
+    }
+
+    .card:hover {
+      transform: scale(1.01);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-content {
+      opacity: 0.7;
+      transition: opacity 0.3s ease, max-height 0.5s ease;
+    }
+
+    .card.expanded .card-content {
+      opacity: 1;
+    }
+
+    .card-footer {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .card-footer:hover {
+      color: white;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    .text-green {
+      color: #86efac;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .gradient-red {
+      background: var(--red-gradient);
+    }
+
+    .gradient-purple {
+      background: var(--purple-gradient);
+    }
+
+    .gradient-green {
+      background: var(--green-gradient);
+    }
+
+    .gradient-blue {
+      background: var(--blue-gradient);
+    }
+    .elegant-section {
+    margin-top: 40px;
+    padding-left: 10px;
+    border-left: 4px solid #90caf9;
+}
+
+.elegant-section h2 {
+    font-size: 1.6rem;
+    color: #90caf9;
+    margin-bottom: 10px;
+}
+
+.elegant-section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    color: #d0d0d0;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Vitamin Deficiency Detected</h1>
+
+    {% if vitamin == 'Vitamin A' %}
+        
+    <section class="overview">
+      <h2>Overview</h2>
+      <p>Vitamin A is an essential nutrient for vision, immune system function, and skin health. It can be found in two primary forms: preformed vitamin A (retinol) from animal products and provitamin A (carotenoids) from plant-based foods.</p>
+
+    </section>
+
+    <section class="cards">
+      <div class="card gradient-red" id="symptoms">
+        <div class="card-header" onclick="toggleCard('symptoms')">Symptoms <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Night blindness (difficulty seeing in low light)</li>
+            <li>Dry eyes (xerophthalmia)</li>
+            <li>Dry skin and hair</li>
+            <li>Bitot's spots (foamy patches on the whites of the eyes)</li>
+            <li>Frequent infections</li>
+            <li>Delayed growth in children</li>
+            <li>Throat and chest infections</li>
+            <li>Acne and breakouts</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('symptoms')">Show more</div>
+      </div>
+
+      <div class="card gradient-purple" id="healthRisks">
+        <div class="card-header" onclick="toggleCard('healthRisks')">Health Risks <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Permanent blindness</li>
+            <li>Increased mortality, especially in children</li>
+            <li>Compromised immune system</li>
+            <li>Increased risk of respiratory and diarrheal infections</li>
+            <li>Anemia</li>
+            <li>Growth retardation</li>
+            <li>Reproductive issues</li>
+            <li>Increased risk of maternal mortality</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('healthRisks')">Show more</div>
+      </div>
+
+      <div class="card gradient-green" id="suggestedFood">
+        <div class="card-header" onclick="toggleCard('suggestedFood')">Suggested Food <span>o</span></div>
+        <div class="card-content">
+          <p class="text-green">Animal Sources (Preformed Vitamin A):</p>
+          <ul>
+            <li>Liver (beef, chicken, fish)</li>
+            <li>Cod liver oil</li>
+            <li>Egg yolks</li>
+            <li>Dairy products (milk, cheese, butter)</li>
+          </ul>
+          <p class="text-green">Plant Sources (Beta-carotene):</p>
+          <ul>
+            <li>Orange and yellow vegetables (carrots, sweet potatoes, pumpkin)</li>
+            <li>Dark leafy greens (spinach, kale, collard greens)</li>
+            <li>Orange fruits (mangoes, papaya, apricots)</li>
+            <li>Red bell peppers</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('suggestedFood')">Show more</div>
+      </div>
+
+      <div class="card gradient-blue" id="tips">
+        <div class="card-header" onclick="toggleCard('tips')">Tips <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Include at least one vitamin A-rich food in your daily diet</li>
+            <li>Pair plant sources with a small amount of healthy fat to improve absorption</li>
+            <li>Cook carrots and other vegetables lightly to preserve nutrients</li>
+            <li>Consider a multivitamin if your diet is limited</li>
+            <li>Consult with a healthcare provider before starting supplements</li>
+            <li>Store vitamin A-rich vegetables in a cool, dark place</li>
+            <li>Pregnant women should ensure adequate intake but avoid excessive supplementation</li>
+            <li>Regular eye check-ups can help detect early signs of deficiency</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('tips')">Show more</div>
+      </div>
+    </section>
+    <div class="elegant-section">
+        <h2>Prevention of Vitamin A Deficiency</h2>
+        <p>Vitamin A deficiency can be prevented by maintaining a balanced diet with adequate sources of the vitamin. It is especially important for individuals who have limited access to fresh fruits and vegetables, pregnant women, and young children.</p>
+    </div>
+    
+    <div class="elegant-section">
+        <h2>Treatment for Vitamin A Deficiency</h2>
+        <p>If diagnosed with a Vitamin A deficiency, a healthcare provider may recommend vitamin A supplements or dietary changes to address the deficiency. In severe cases, higher doses of vitamin A may be administered under medical supervision.</p>
+    
+    </div>
+
+    {% elif vitamin == 'Vitamin B' %}
+
+    <h1>Vitamin B Deficiency</h1>
+    <section class="overview">
+    <h2>Overview</h2>
+    <p>
+        Vitamin B refers to a group of eight B vitamins that play vital roles in energy production, brain function, and cell metabolism. These include B1 (thiamine), B2 (riboflavin), B3 (niacin), B5, B6, B7, B9 (folate), and B12. Deficiency in one or more can lead to serious health issues.
+    </p>
+    </section>
+    <section class="cards">
+    <!-- Symptoms -->
+    <div class="card gradient-red" id="b-symptoms">
+        <div class="card-header" onclick="toggleCard('b-symptoms')">Symptoms <span>o</span></div>
+        <div class="card-content">
+        <ul>
+            <li>Fatigue and weakness</li>
+            <li>Irritability and mood changes</li>
+            <li>Tingling or numbness in hands/feet</li>
+            <li>Confusion or memory problems</li>
+            <li>Sores around the mouth</li>
+            <li>Poor coordination</li>
+        </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('b-symptoms')">Show more</div>
+    </div>
+
+    <!-- Health Risks -->
+    <div class="card gradient-purple" id="b-healthRisks">
+        <div class="card-header" onclick="toggleCard('b-healthRisks')">Health Risks <span>o</span></div>
+        <div class="card-content">
+        <ul>
+            <li>Anemia</li>
+            <li>Nerve damage (neuropathy)</li>
+            <li>Cognitive decline</li>
+            <li>Heart disease</li>
+            <li>Birth defects (especially folate deficiency)</li>
+            <li>Impaired metabolism</li>
+        </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('b-healthRisks')">Show more</div>
+    </div>
+
+    <!-- Suggested Foods -->
+    <div class="card gradient-green" id="b-suggestedFood">
+        <div class="card-header" onclick="toggleCard('b-suggestedFood')">Suggested Food <span>o</span></div>
+        <div class="card-content">
+        <p class="text-green">Animal Sources:</p>
+        <ul>
+            <li>Eggs</li>
+            <li>Dairy products</li>
+            <li>Fish and poultry</li>
+            <li>Red meat</li>
+        </ul>
+        <p class="text-green">Plant Sources:</p>
+        <ul>
+            <li>Whole grains</li>
+            <li>Leafy green vegetables</li>
+            <li>Legumes (beans, lentils)</li>
+            <li>Nuts and seeds</li>
+            <li>Fortified cereals</li>
+        </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('b-suggestedFood')">Show more</div>
+    </div>
+
+    <!-- Tips -->
+    <div class="card gradient-blue" id="b-tips">
+        <div class="card-header" onclick="toggleCard('b-tips')">Tips <span>o</span></div>
+        <div class="card-content">
+        <ul>
+            <li>Include a mix of animal and plant-based foods</li>
+            <li>Look for fortified cereals if vegetarian</li>
+            <li>Don't overcook vegetables — preserve B vitamins</li>
+            <li>Consider a B-complex supplement if advised</li>
+            <li>Pregnant women should monitor folate intake</li>
+            <li>Avoid excessive alcohol which depletes B vitamins</li>
+        </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('b-tips')">Show more</div>
+    </div>
+    </section>
+
+    <!-- Elegant Sections -->
+    <div class="elegant-section">
+    <h2>Prevention of Vitamin B Deficiency</h2>
+    <p>Consume a varied diet rich in whole grains, leafy vegetables, and animal products. Fortified foods and B-complex supplements may be necessary for vegetarians or people with absorption issues.</p>
+    </div>
+
+    <div class="elegant-section">
+    <h2>Treatment for Vitamin B Deficiency</h2>
+    <p>Treatment depends on the specific B vitamin deficiency. It may include oral supplements, dietary adjustments, or injections (especially for B12). Seek medical evaluation for proper diagnosis.</p>
+    </div>
+
+   {% elif vitamin == 'Vitamin B12' %}
+   <h1>Vitamin B12 Deficiency</h1>
+
+   <section class="overview">
+     <h2>Overview</h2>
+     <p>
+       Vitamin B12 (cobalamin) is crucial for nerve tissue health, brain function, and the production of red blood cells. Since it is mostly found in animal products, vegetarians and vegans are at a higher risk of deficiency.
+     </p>
+   </section>
+   
+   <section class="cards">
+     <!-- Symptoms -->
+     <div class="card gradient-red" id="b12-symptoms">
+       <div class="card-header" onclick="toggleCard('b12-symptoms')">Symptoms <span>o</span></div>
+       <div class="card-content">
+         <ul>
+           <li>Fatigue and weakness</li>
+           <li>Tingling or numbness in hands and feet</li>
+           <li>Difficulty walking or balance issues</li>
+           <li>Memory loss and cognitive difficulties</li>
+           <li>Pale or jaundiced skin</li>
+           <li>Glossitis and mouth ulcers</li>
+         </ul>
+       </div>
+       <div class="card-footer" onclick="toggleCard('b12-symptoms')">Show more</div>
+     </div>
+   
+     <!-- Health Risks -->
+     <div class="card gradient-purple" id="b12-healthRisks">
+       <div class="card-header" onclick="toggleCard('b12-healthRisks')">Health Risks <span>o</span></div>
+       <div class="card-content">
+         <ul>
+           <li>Pernicious anemia</li>
+           <li>Neurological damage</li>
+           <li>Impaired brain function</li>
+           <li>Depression and mood disorders</li>
+           <li>Increased risk of heart disease (via homocysteine)</li>
+         </ul>
+       </div>
+       <div class="card-footer" onclick="toggleCard('b12-healthRisks')">Show more</div>
+     </div>
+   
+     <!-- Suggested Foods -->
+     <div class="card gradient-green" id="b12-suggestedFood">
+       <div class="card-header" onclick="toggleCard('b12-suggestedFood')">Suggested Food <span>o</span></div>
+       <div class="card-content">
+         <ul>
+           <li>Eggs and dairy (milk, cheese, yogurt)</li>
+           <li>Fish (salmon, trout, tuna)</li>
+           <li>Meat and poultry (chicken, beef, liver)</li>
+           <li>Fortified cereals and plant milks</li>
+           <li>Nutritional yeast (fortified)</li>
+         </ul>
+       </div>
+       <div class="card-footer" onclick="toggleCard('b12-suggestedFood')">Show more</div>
+     </div>
+   
+     <!-- Tips -->
+     <div class="card gradient-blue" id="b12-tips">
+       <div class="card-header" onclick="toggleCard('b12-tips')">Tips <span>o</span></div>
+       <div class="card-content">
+         <ul>
+           <li>Include animal-based products regularly (or fortified options)</li>
+           <li>Vegans should consider B12 supplements</li>
+           <li>Check B12 levels if experiencing fatigue or tingling</li>
+           <li>Pair B12-rich foods with a balanced diet for absorption</li>
+           <li>Consult a doctor before starting B12 injections or high-dose supplements</li>
+         </ul>
+       </div>
+       <div class="card-footer" onclick="toggleCard('b12-tips')">Show more</div>
+     </div>
+   </section>
+   
+   <div class="elegant-section">
+     <h2>Prevention of Vitamin B12 Deficiency</h2>
+     <p>Eat a diet rich in animal products or fortified plant-based options. Vegans and older adults should consider regular B12 supplements or injections as advised by a doctor.</p>
+   </div>
+   
+   <div class="elegant-section">
+     <h2>Treatment for Vitamin B12 Deficiency</h2>
+     <p>Treatment includes oral supplements or intramuscular B12 injections in severe cases. Long-term management depends on diet, absorption ability, and medical conditions like pernicious anemia.</p>
+   </div>
+   
+
+    {% elif vitamin == 'Vitamin C' %}
+        <h1>Vitamin C Deficiency</h1>
+
+    <section class="overview">
+      <h2>Overview</h2>
+      <p>
+        Vitamin C (ascorbic acid) is essential for collagen synthesis, immune function, and iron absorption. It also acts as an antioxidant, protecting cells from damage. Deficiency can result in weakened immunity and connective tissue problems.
+      </p>
+    </section>
+
+    <section class="cards">
+      <!-- Symptoms -->
+      <div class="card gradient-red" id="c-symptoms">
+        <div class="card-header" onclick="toggleCard('c-symptoms')">Symptoms <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Fatigue and weakness</li>
+            <li>Dry and splitting hair</li>
+            <li>Swollen and bleeding gums</li>
+            <li>Slow wound healing</li>
+            <li>Easy bruising</li>
+            <li>Frequent infections</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('c-symptoms')">Show more</div>
+      </div>
+
+      <!-- Health Risks -->
+      <div class="card gradient-purple" id="c-healthRisks">
+        <div class="card-header" onclick="toggleCard('c-healthRisks')">Health Risks <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Scurvy</li>
+            <li>Impaired immune function</li>
+            <li>Joint pain and swelling</li>
+            <li>Iron deficiency anemia (due to poor absorption)</li>
+            <li>Skin issues</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('c-healthRisks')">Show more</div>
+      </div>
+
+      <!-- Suggested Foods -->
+      <div class="card gradient-green" id="c-suggestedFood">
+        <div class="card-header" onclick="toggleCard('c-suggestedFood')">Suggested Food <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Citrus fruits (oranges, lemons)</li>
+            <li>Strawberries</li>
+            <li>Kiwi</li>
+            <li>Bell peppers</li>
+            <li>Broccoli</li>
+            <li>Tomatoes</li>
+            <li>Leafy greens</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('c-suggestedFood')">Show more</div>
+      </div>
+
+      <!-- Tips -->
+      <div class="card gradient-blue" id="c-tips">
+        <div class="card-header" onclick="toggleCard('c-tips')">Tips <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Eat fresh fruits and veggies daily</li>
+            <li>Drink citrus-based juices in the morning</li>
+            <li>Avoid overcooking – vitamin C is heat-sensitive</li>
+            <li>Add lemon to your salads or water</li>
+            <li>Store fruits in cool, dry areas to retain nutrients</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('c-tips')">Show more</div>
+      </div>
+    </section>
+
+    <div class="elegant-section">
+      <h2>Prevention of Vitamin C Deficiency</h2>
+      <p>Consume a variety of fruits and vegetables, especially citrus fruits and colorful produce. Incorporate raw salads and juices to maintain vitamin C levels.</p>
+    </div>
+
+    <div class="elegant-section">
+      <h2>Treatment for Vitamin C Deficiency</h2>
+      <p>Treatment includes dietary improvements and vitamin C supplementation. Severe deficiencies like scurvy may require high-dose supplementation under medical supervision.</p>
+    </div>
+
+    {% elif vitamin == 'Vitamin D' %}
+    <h1>Vitamin D Deficiency</h1>
+
+    <section class="overview">
+      <h2>Overview</h2>
+      <p>
+        Vitamin D helps the body absorb calcium and is critical for bone health, immune function, and mood regulation. It's synthesized by the skin when exposed to sunlight and is also available in certain foods.
+      </p>
+    </section>
+    
+    <section class="cards">
+      <!-- Symptoms -->
+      <div class="card gradient-red" id="d-symptoms">
+        <div class="card-header" onclick="toggleCard('d-symptoms')">Symptoms <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Bone pain and muscle weakness</li>
+            <li>Fatigue and tiredness</li>
+            <li>Mood changes or depression</li>
+            <li>Frequent illnesses or infections</li>
+            <li>Hair loss</li>
+            <li>Back pain</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('d-symptoms')">Show more</div>
+      </div>
+    
+      <!-- Health Risks -->
+      <div class="card gradient-purple" id="d-healthRisks">
+        <div class="card-header" onclick="toggleCard('d-healthRisks')">Health Risks <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Osteoporosis</li>
+            <li>Rickets in children</li>
+            <li>Fractures and falls in older adults</li>
+            <li>Weakened immune response</li>
+            <li>Cardiovascular diseases</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('d-healthRisks')">Show more</div>
+      </div>
+    
+      <!-- Suggested Foods -->
+      <div class="card gradient-green" id="d-suggestedFood">
+        <div class="card-header" onclick="toggleCard('d-suggestedFood')">Suggested Food <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Fatty fish (salmon, tuna, mackerel)</li>
+            <li>Egg yolks</li>
+            <li>Cheese</li>
+            <li>Fortified milk and plant-based alternatives</li>
+            <li>Fortified cereals and juices</li>
+            <li>Mushrooms exposed to sunlight</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('d-suggestedFood')">Show more</div>
+      </div>
+    
+      <!-- Tips -->
+      <div class="card gradient-blue" id="d-tips">
+        <div class="card-header" onclick="toggleCard('d-tips')">Tips <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Spend 15–20 minutes in the sun daily</li>
+            <li>Include vitamin D-rich foods in meals</li>
+            <li>Consider supplements during winter</li>
+            <li>Check vitamin D levels if you're often tired</li>
+            <li>Combine with calcium for stronger bones</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('d-tips')">Show more</div>
+      </div>
+    </section>
+    
+    <div class="elegant-section">
+      <h2>Prevention of Vitamin D Deficiency</h2>
+      <p>Ensure moderate sun exposure, consume fortified foods, and maintain a balanced diet. Consider supplementation in low sunlight regions or for individuals with limited sun exposure.</p>
+    </div>
+    
+    <div class="elegant-section">
+      <h2>Treatment for Vitamin D Deficiency</h2>
+      <p>Oral vitamin D supplements, dietary adjustments, and increased safe sun exposure are recommended. Severe deficiency may require high-dose therapy prescribed by a healthcare professional.</p>
+    </div>
+
+    {% elif vitamin == 'Vitamin E' %}
+    <h1>Vitamin E Deficiency</h1>
+
+    <section class="overview">
+      <h2>Overview</h2>
+      <p>
+        Vitamin E is a powerful antioxidant that protects cell membranes and supports immune function, skin health, and vision. It also helps prevent oxidative stress and may reduce the risk of chronic diseases.
+      </p>
+    </section>
+    
+    <section class="cards">
+      <!-- Symptoms -->
+      <div class="card gradient-red" id="e-symptoms">
+        <div class="card-header" onclick="toggleCard('e-symptoms')">Symptoms <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Muscle weakness</li>
+            <li>Vision problems</li>
+            <li>Coordination issues</li>
+            <li>Numbness or tingling</li>
+            <li>Weakened immune response</li>
+            <li>Dry skin and hair</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('e-symptoms')">Show more</div>
+      </div>
+    
+      <!-- Health Risks -->
+      <div class="card gradient-purple" id="e-healthRisks">
+        <div class="card-header" onclick="toggleCard('e-healthRisks')">Health Risks <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Neurological damage</li>
+            <li>Muscle degeneration</li>
+            <li>Retinal damage</li>
+            <li>Increased oxidative stress</li>
+            <li>Impaired immune system</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('e-healthRisks')">Show more</div>
+      </div>
+    
+      <!-- Suggested Foods -->
+      <div class="card gradient-green" id="e-suggestedFood">
+        <div class="card-header" onclick="toggleCard('e-suggestedFood')">Suggested Food <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Almonds</li>
+            <li>Sunflower seeds</li>
+            <li>Spinach</li>
+            <li>Avocados</li>
+            <li>Peanuts</li>
+            <li>Wheat germ oil</li>
+            <li>Olive oil</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('e-suggestedFood')">Show more</div>
+      </div>
+    
+      <!-- Tips -->
+      <div class="card gradient-blue" id="e-tips">
+        <div class="card-header" onclick="toggleCard('e-tips')">Tips <span>o</span></div>
+        <div class="card-content">
+          <ul>
+            <li>Include nuts and seeds in snacks</li>
+            <li>Drizzle salads with healthy oils</li>
+            <li>Combine vitamin E with vitamin C for synergy</li>
+            <li>Choose unprocessed, fresh produce</li>
+            <li>Limit processed foods which deplete antioxidants</li>
+          </ul>
+        </div>
+        <div class="card-footer" onclick="toggleCard('e-tips')">Show more</div>
+      </div>
+    </section>
+    
+    <div class="elegant-section">
+      <h2>Prevention of Vitamin E Deficiency</h2>
+      <p>Consume a balanced diet rich in healthy fats, nuts, seeds, and green leafy vegetables. Cooking with natural oils like olive oil also helps maintain levels.</p>
+    </div>
+    
+    <div class="elegant-section">
+      <h2>Treatment for Vitamin E Deficiency</h2>
+      <p>Supplementation is the primary treatment, especially for those with absorption disorders. Dietary changes should also support long-term levels and health benefits.</p>
+    </div>
+
+    {% else %}
+        <p>No detailed information found for this vitamin.</p>
+    {% endif %}
+
+    <p><em>⚠️ Please consult a certified healthcare provider for accurate diagnosis and treatment.</em></p>
+</div>
+
+
+<script>
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('expanded');
+
+    const footer = card.querySelector('.card-footer');
+    footer.textContent = card.classList.contains('expanded') ? 'Show less' : 'Show more';
+
+    const arrow = card.querySelector('.card-header span');
+    arrow.textContent = card.classList.contains('expanded') ? '▲' : 'o';
+  }
+</script>
+</body>
+</html>

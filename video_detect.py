@@ -37,5 +37,4 @@ def detect_best_face(video_path):
         save_path = os.path.join("static/Detected", filename)
         Image.fromarray(cv2.cvtColor(best_crop, cv2.COLOR_BGR2RGB)).save(save_path)
         return save_path
-
     return None

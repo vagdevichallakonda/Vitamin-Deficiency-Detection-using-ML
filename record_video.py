@@ -42,3 +42,28 @@ def record():
 
     print(f"[INFO] Recording saved at: {video_path}")
     return video_path
+
+def capture_image():
+    # Initialize the webcam
+    cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)  # 0 is for the default camera
+
+    if not cap.isOpened():
+        print("[ERROR] Unable to access the camera")
+        return None
+
+    # Capture one frame
+    ret, frame = cap.read()
+
+    if not ret:
+        print("[ERROR] Failed to capture image")
+        cap.release()
+        return None
+
+    # Save the captured frame as an image file
+    image_filename = "live_image.jpg"
+    image_path = f"static/uploads/{image_filename}"
+    cv2.imwrite(image_path, frame)
+
+    # Release the webcam and return the path of the saved image
+    cap.release()
+    return image_path
