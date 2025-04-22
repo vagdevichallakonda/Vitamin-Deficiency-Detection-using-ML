@@ -1,7 +1,7 @@
 Flask==3.1.0
 imageio==2.33.1
 matplotlib==3.10.1
-numpy==1.23.0
+numpy>=1.23.5
 opencv_contrib_python==4.11.0.86
 opencv_python==4.11.0.86
 Pillow==11.2.1
