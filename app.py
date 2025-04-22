@@ -327,4 +327,4 @@ def capture_image():
 if __name__ == '__main__':
     # import webbrowser
     # webbrowser.open('http://127.0.0.1:5000')
-    app.run(debug=True)
+    app.run()
