@@ -1,21 +1,17 @@
 from flask import *
 from werkzeug.utils import secure_filename
-
 import os
 import cv2
-
 import image_fuzzy_clustering as fem
 import record_video
 import label_image
-
 from PIL import Image
-
 import secrets
 from flask import url_for, current_app
 from tensorflow.keras.preprocessing.image import img_to_array
 import numpy as np
-
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 
 def load_image(image):
@@ -32,30 +28,24 @@ def process(image_path):
     print("[INFO] Performing image clustering...")
     fem.plot_cluster_img(image_path, 3)
     print("[INFO] Clustering completed.")
-
-    clustered_path = 'static/images/orig_image.jpg'  # Assuming this is where clustering saves
+    clustered_path = 'static/images/orig_image.jpg'
     result = load_image(clustered_path)
-
     return result if result else "Prediction failed"
 
-
-
-
-
-
 def prepare_image(image, target):
-    # if the image mode is not RGB, convert it
     if image.mode != "RGB":
         image = image.convert("RGB")
-
-    # resize the input image and preprocess it
     image = image.resize(target)
     image = img_to_array(image)
     image = np.expand_dims(image, axis=0)
     image = imagenet_utils.preprocess_input(image)
-
-    # return the processed image
     return image
+
+def resize_image(image_path, max_size=(1024, 1024)):
+    with Image.open(image_path) as img:
+        img.thumbnail(max_size)
+        img.save(image_path)
+
 
 app = Flask(__name__)
 model = None
@@ -66,8 +56,6 @@ UPLOAD_FOLDER = os.path.join(app.root_path ,'static','uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-
-
 @app.route('/')
 @app.route('/first')
 def first():
@@ -76,7 +64,6 @@ def first():
 @app.route('/login')
 def login():
     return render_template('login.html')
-
 
 @app.route('/dashboard')
 def dashboard():
@@ -105,6 +92,7 @@ def upload_image():
         original_filename = secure_filename(f.filename)
         original_path = save_img(f, original_filename)
 
+        resize_image(original_path)
         result = process(original_path)
         print("Raw result:", result)
 
@@ -157,7 +145,9 @@ def upload_video():
 
         print(f"[INFO] Face detected and saved at {best_face_path}")
         detected_path ="static/Detected/detected.jpg"
+        
         if os.path.exists(detected_path):
+            resize_image(detected_path)
             result = process(detected_path)
             print("Raw result:", result)
 
@@ -186,7 +176,6 @@ def upload_video():
         return jsonify({'error': str(e)}), 500
         
 
-
 @app.route('/record_video', methods=['GET','POST'])
 def record_video_route():
     try:
@@ -213,6 +202,7 @@ def record_video_route():
         
         detected_path ="static/Detected/detected.jpg"
         if os.path.exists(detected_path):
+            resize_image(detected_path)
             result = process(detected_path)
             print("Raw result:", result)
 
@@ -247,7 +237,7 @@ def record_video_route():
 @app.route('/record_live_image', methods=['GET', 'POST'])
 def record_live_image_route():
     try:
-        from record_video import record_live_image  # Function to capture live image using webcam
+        from record_video import record_live_image
 
         # Step 1: Capture image from the webcam
         print("[INFO] Starting live image capture...")
@@ -259,6 +249,8 @@ def record_live_image_route():
         print(f"[INFO] Live image captured and saved at {image_path}")
 
         # Step 2: Process the captured image for clustering and prediction
+        # Resize the image to a maximum size of 1024x1024
+        resize_image(image_path) 
         result = process(image_path)
         print("Raw result:", result)
 
@@ -291,7 +283,7 @@ def record_live_image_route():
 @app.route('/capture_image', methods=['GET', 'POST'])
 def capture_image():
     try:
-        from record_video import capture_image  # Function to capture live image using webcam
+        from record_video import capture_image
 
         # Step 1: Capture image from the webcam
         print("[INFO] Starting live image capture...")
@@ -332,11 +324,7 @@ def capture_image():
         print(f"[ERROR] /record_live_image failed: {e}")
         return jsonify({'error': str(e)}), 500
     
-
-
-    
-    
 if __name__ == '__main__':
-    import webbrowser
-    webbrowser.open('http://127.0.0.1:5000')
-    app.run()
+    # import webbrowser
+    # webbrowser.open('http://127.0.0.1:5000')
+    app.run(debug=True)
